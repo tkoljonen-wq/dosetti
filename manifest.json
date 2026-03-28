@@ -2,7 +2,7 @@
   "name": "Dosetti",
   "short_name": "Dosetti",
   "description": "Päivittäinen lääkemuistutus",
-  "start_url": "./dosetti.html",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0f0f1a",
   "theme_color": "#0f0f1a",
