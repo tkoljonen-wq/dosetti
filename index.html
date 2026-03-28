@@ -307,6 +307,16 @@ function calcStreak(state) {
   return streak;
 }
 
+function updateBadge(taken) {
+  if ('setAppBadge' in navigator) {
+    if (taken) {
+      navigator.clearAppBadge().catch(() => {});
+    } else {
+      navigator.setAppBadge(1).catch(() => {});
+    }
+  }
+}
+
 function updateUI() {
   const state = load();
   const t = todayKey();
@@ -320,6 +330,7 @@ function updateUI() {
   document.getElementById('timeTaken').textContent  = (taken && state[t+'_time'])
     ? `Kuitattu klo ${state[t+'_time']}` : '\u00a0';
   document.getElementById('streakValue').textContent = calcStreak(state);
+  updateBadge(taken);
 }
 
 function updateDate() {
