@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dosetti</title>
+
+  <link rel="manifest" href="./manifest.json">
+  <link rel="apple-touch-icon" href="./icon-192.png">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -50,12 +53,12 @@
       background-image:
         radial-gradient(1px 1px at 20% 15%, rgba(78,195,255,0.5) 0%, transparent 100%),
         radial-gradient(1px 1px at 75% 30%, rgba(78,195,255,0.35) 0%, transparent 100%),
-        radial-gradient(1px 1px at 40% 70%, rgba(78,195,255,0.4) 0%, transparent 100%),
-        radial-gradient(1px 1px at 85% 65%, rgba(78,195,255,0.3) 0%, transparent 100%),
-        radial-gradient(1px 1px at 10% 85%, rgba(78,195,255,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 40% 70%, rgba(78,195,255,0.40) 0%, transparent 100%),
+        radial-gradient(1px 1px at 85% 65%, rgba(78,195,255,0.30) 0%, transparent 100%),
+        radial-gradient(1px 1px at 10% 85%, rgba(78,195,255,0.40) 0%, transparent 100%),
         radial-gradient(1px 1px at 55% 90%, rgba(78,195,255,0.25) 0%, transparent 100%),
-        radial-gradient(1.5px 1.5px at 65% 10%, rgba(255,255,255,0.3) 0%, transparent 100%),
-        radial-gradient(1px 1px at 30% 50%, rgba(255,255,255,0.2) 0%, transparent 100%);
+        radial-gradient(1.5px 1.5px at 65% 10%, rgba(255,255,255,0.30) 0%, transparent 100%),
+        radial-gradient(1px 1px at 30% 50%, rgba(255,255,255,0.20) 0%, transparent 100%);
       pointer-events: none;
       z-index: 0;
     }
@@ -66,8 +69,7 @@
       width: 500px;
       height: 500px;
       background: radial-gradient(circle, rgba(78,195,255,0.06) 0%, transparent 70%);
-      top: 50%;
-      left: 50%;
+      top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       pointer-events: none;
       z-index: 0;
@@ -140,7 +142,7 @@
       font-weight: 500;
       letter-spacing: 0.02em;
       cursor: pointer;
-      transition: transform 0.15s ease, box-shadow 0.25s ease;
+      transition: transform 0.15s ease;
       overflow: hidden;
       outline: none;
     }
@@ -281,7 +283,6 @@
 </div>
 
 <script>
-// ── Storage ───────────────────────────────────────────────────────────────────
 const KEY = 'dosetti_v2';
 
 function todayKey() {
@@ -306,7 +307,6 @@ function calcStreak(state) {
   return streak;
 }
 
-// ── UI ────────────────────────────────────────────────────────────────────────
 function updateUI() {
   const state = load();
   const t = todayKey();
@@ -328,7 +328,8 @@ function updateDate() {
   const months = ['tammikuuta','helmikuuta','maaliskuuta','huhtikuuta','toukokuuta','kesäkuuta',
                   'heinäkuuta','elokuuta','syyskuuta','lokakuuta','marraskuuta','joulukuuta'];
   document.getElementById('dayName').textContent     = days[now.getDay()];
-  document.getElementById('dateDisplay').textContent = `${now.getDate()}. ${months[now.getMonth()]} ${now.getFullYear()}`;
+  document.getElementById('dateDisplay').textContent =
+    `${now.getDate()}. ${months[now.getMonth()]} ${now.getFullYear()}`;
 }
 
 function takeDose() {
@@ -343,11 +344,10 @@ function takeDose() {
   launchConfetti();
 }
 
-// ── Confetti ──────────────────────────────────────────────────────────────────
 function launchConfetti() {
   const canvas = document.getElementById('confetti');
   const ctx = canvas.getContext('2d');
-  canvas.width  = window.innerWidth;
+  canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
   const pieces = Array.from({length: 90}, () => ({
     x: Math.random() * canvas.width, y: -20,
@@ -377,146 +377,20 @@ function launchConfetti() {
   })();
 }
 
-// ── Midnight refresh ──────────────────────────────────────────────────────────
 function scheduleMidnight() {
   const now = new Date();
   const ms = new Date(now.getFullYear(), now.getMonth(), now.getDate()+1) - now;
   setTimeout(() => { updateDate(); updateUI(); scheduleMidnight(); }, ms);
 }
 
-// ── PWA setup ─────────────────────────────────────────────────────────────────
-// Chrome/Android vaatii oikeat PNG-ikonit manifest.json:issa.
-// Generoidaan ne canvaksella ja injektoidaan Blob URL:nä.
-function buildPWA() {
-  // Piirrä pilleri-ikoni annettuun kokoon
-  function drawIcon(size) {
-    const c = document.createElement('canvas');
-    c.width = c.height = size;
-    const ctx = c.getContext('2d');
-    const s = size;
-
-    // Pyöristetty tausta
-    ctx.fillStyle = '#0f0f1a';
-    if (ctx.roundRect) {
-      ctx.beginPath(); ctx.roundRect(0, 0, s, s, s * 0.22); ctx.fill();
-    } else {
-      const r = s * 0.22;
-      ctx.beginPath();
-      ctx.moveTo(r, 0); ctx.lineTo(s-r, 0);
-      ctx.quadraticCurveTo(s, 0, s, r);
-      ctx.lineTo(s, s-r); ctx.quadraticCurveTo(s, s, s-r, s);
-      ctx.lineTo(r, s);   ctx.quadraticCurveTo(0, s, 0, s-r);
-      ctx.lineTo(0, r);   ctx.quadraticCurveTo(0, 0, r, 0);
-      ctx.closePath(); ctx.fill();
-    }
-
-    // Pillerin taustaellipsi (hehku)
-    ctx.fillStyle = 'rgba(78,195,255,0.10)';
-    ctx.beginPath();
-    ctx.ellipse(s/2, s/2, s*0.37, s*0.22, 0, 0, Math.PI*2);
-    ctx.fill();
-
-    // Pilleri – oikea puoli (vaalea sininen)
-    const px = s * 0.14, py = s * 0.40, pw = s * 0.72, ph = s * 0.20;
-    const pr = ph / 2;
-    ctx.fillStyle = '#4ec3ff';
-    ctx.beginPath();
-    if (ctx.roundRect) {
-      ctx.roundRect(px, py, pw, ph, pr);
-    } else {
-      ctx.moveTo(px + pr, py);
-      ctx.lineTo(px + pw - pr, py);
-      ctx.quadraticCurveTo(px + pw, py, px + pw, py + pr);
-      ctx.lineTo(px + pw, py + ph - pr);
-      ctx.quadraticCurveTo(px + pw, py + ph, px + pw - pr, py + ph);
-      ctx.lineTo(px + pr, py + ph);
-      ctx.quadraticCurveTo(px, py + ph, px, py + ph - pr);
-      ctx.lineTo(px, py + pr);
-      ctx.quadraticCurveTo(px, py, px + pr, py);
-    }
-    ctx.fill();
-
-    // Pilleri – vasen puoli (tumma sininen)
-    ctx.fillStyle = '#1a6aaa';
-    ctx.beginPath();
-    if (ctx.roundRect) {
-      ctx.roundRect(px, py, pw / 2, ph, pr);
-    } else {
-      ctx.moveTo(px + pr, py);
-      ctx.lineTo(px + pw/2, py);
-      ctx.lineTo(px + pw/2, py + ph);
-      ctx.lineTo(px + pr, py + ph);
-      ctx.quadraticCurveTo(px, py + ph, px, py + ph - pr);
-      ctx.lineTo(px, py + pr);
-      ctx.quadraticCurveTo(px, py, px + pr, py);
-    }
-    ctx.fill();
-
-    // Jakoviiva
-    ctx.fillStyle = 'rgba(255,255,255,0.18)';
-    ctx.fillRect(s/2 - 1, py, 2, ph);
-
-    // Koristepisteet
-    [[s*0.32, s*0.29],[s*0.68, s*0.71]].forEach(([cx, cy]) => {
-      ctx.fillStyle = 'rgba(78,195,255,0.6)';
-      ctx.beginPath();
-      ctx.arc(cx, cy, s * 0.038, 0, Math.PI*2);
-      ctx.fill();
-    });
-
-    return c.toDataURL('image/png');
-  }
-
-  const icon192 = drawIcon(192);
-  const icon512 = drawIcon(512);
-
-  // Apple touch icon (iOS)
-  const appleLink = document.createElement('link');
-  appleLink.rel = 'apple-touch-icon';
-  appleLink.href = icon192;
-  document.head.appendChild(appleLink);
-
-  // Manifest
-  const manifest = {
-    name: 'Dosetti',
-    short_name: 'Dosetti',
-    description: 'Päivittäinen lääkemuistutus',
-    start_url: location.href,
-    display: 'standalone',
-    background_color: '#0f0f1a',
-    theme_color: '#0f0f1a',
-    icons: [
-      { src: icon192, sizes: '192x192', type: 'image/png', purpose: 'any maskable' },
-      { src: icon512, sizes: '512x512', type: 'image/png', purpose: 'any maskable' },
-    ],
-  };
-
-  const mBlob = new Blob([JSON.stringify(manifest)], { type: 'application/manifest+json' });
-  const mURL  = URL.createObjectURL(mBlob);
-  const mLink = document.createElement('link');
-  mLink.rel  = 'manifest';
-  mLink.href = mURL;
-  document.head.appendChild(mLink);
-
-  // Service Worker (tarvitaan PWA-asennusvaatimuksiin)
-  if ('serviceWorker' in navigator) {
-    const swSrc = `
-self.addEventListener('install',  () => self.skipWaiting());
-self.addEventListener('activate', () => clients.claim());
-self.addEventListener('fetch', e => e.respondWith(
-  fetch(e.request).catch(() => new Response('', { status: 200 }))
-));`;
-    const swBlob = new Blob([swSrc], { type: 'application/javascript' });
-    navigator.serviceWorker.register(URL.createObjectURL(swBlob))
-      .catch(e => console.warn('SW:', e));
-  }
+// Service Worker
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').catch(() => {});
 }
 
-// ── Init ──────────────────────────────────────────────────────────────────────
 updateDate();
 updateUI();
 scheduleMidnight();
-buildPWA();
 </script>
 </body>
 </html>
