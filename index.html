@@ -4,31 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dosetti</title>
-
-  <!-- PWA manifest inline via data URI -->
-  <link rel="manifest" href="data:application/json;charset=utf-8,%7B%22name%22%3A%22Dosetti%22%2C%22short_name%22%3A%22Dosetti%22%2C%22description%22%3A%22P%C3%A4ivitt%C3%A4inen%20l%C3%A4%C3%A4kemuistutus%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%231a1a2e%22%2C%22theme_color%22%3A%22%231a1a2e%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHzdmcgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDE5MiAxOTIiPjxyZWN0IHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiByeD0iNDgiIGZpbGw9IiMxYTFhMmUiLz48ZWxsaXBzZSBjeD0iOTYiIGN5PSI5NiIgcng9IjUwIiByeT0iMzAiIGZpbGw9IiM0ZWMzZmYiIG9wYWNpdHk9IjAuMiIvPjxyZWN0IHg9IjQ2IiB5PSI4MyIgd2lkdGg9IjEwMCIgaGVpZ2h0PSIyNiIgcng9IjEzIiBmaWxsPSIjNGVjM2ZmIi8%2BPHJlY3QgeD0iNDYiIHk9IjgzIiB3aWR0aD0iNTAiIGhlaWdodD0iMjYiIHJ4PSIxMyIgZmlsbD0iIzFlOTBmZiIvPjxjaXJjbGUgY3g9IjcxIiBjeT0iNjAiIHI9IjUiIGZpbGw9IiM0ZWMzZmYiIG9wYWNpdHk9IjAuNiIvPjxjaXJjbGUgY3g9IjEyMSIgY3k9IjEzMiIgcj0iNSIgZmlsbD0iIzRlYzNmZiIgb3BhY2l0eT0iMC42Ii8%2BPC9zdmc%2B%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%7D%5D%7D">
-
-  <!-- iOS / Safari meta -->
+  <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Dosetti">
-  <meta name="theme-color" content="#1a1a2e">
-
-  <!-- Apple touch icon (inline SVG as data URI) -->
-  <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxOTIgMTkyIj48cmVjdCB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgcng9IjQ4IiBmaWxsPSIjMWExYTJlIi8+PGVsbGlwc2UgY3g9Ijk2IiBjeT0iOTYiIHJ4PSI1MCIgcnk9IjMwIiBmaWxsPSIjNGVjM2ZmIiBvcGFjaXR5PSIwLjIiLz48cmVjdCB4PSI0NiIgeT0iODMiIHdpZHRoPSIxMDAiIGhlaWdodD0iMjYiIHJ4PSIxMyIgZmlsbD0iIzRlYzNmZiIvPjxyZWN0IHg9IjQ2IiB5PSI4MyIgd2lkdGg9IjUwIiBoZWlnaHQ9IjI2IiByeD0iMTMiIGZpbGw9IiMxZTkwZmYiLz48Y2lyY2xlIGN4PSI3MSIgY3k9IjYwIiByPSI1IiBmaWxsPSIjNGVjM2ZmIiBvcGFjaXR5PSIwLjYiLz48Y2lyY2xlIGN4PSIxMjEiIGN5PSIxMzIiIHI9IjUiIGZpbGw9IiM0ZWMzZmYiIG9wYWNpdHk9IjAuNiIvPjwvc3ZnPg==">
+  <meta name="theme-color" content="#0f0f1a">
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap');
 
     :root {
-      --bg:       #0f0f1a;
-      --surface:  #1a1a2e;
-      --border:   rgba(78,195,255,0.15);
-      --text:     #e8eaf0;
-      --muted:    #7a8099;
-      --accent:   #4ec3ff;
-      --red:      #ff4b6e;
-      --green:    #00d68f;
+      --bg:      #0f0f1a;
+      --surface: #1a1a2e;
+      --border:  rgba(78,195,255,0.15);
+      --text:    #e8eaf0;
+      --muted:   #7a8099;
+      --accent:  #4ec3ff;
+      --red:     #ff4b6e;
+      --green:   #00d68f;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -48,10 +41,8 @@
       justify-content: center;
       min-height: 100dvh;
       padding: 2rem 1.5rem;
-      overflow: hidden;
     }
 
-    /* Starfield bg */
     body::before {
       content: '';
       position: fixed;
@@ -69,7 +60,6 @@
       z-index: 0;
     }
 
-    /* Glow orb */
     body::after {
       content: '';
       position: fixed;
@@ -127,7 +117,7 @@
     .date-display {
       font-size: 0.8rem;
       color: var(--muted);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.3rem;
       letter-spacing: 0.06em;
       text-transform: uppercase;
     }
@@ -137,10 +127,8 @@
       font-size: 1.6rem;
       color: var(--text);
       margin-bottom: 2rem;
-      letter-spacing: -0.01em;
     }
 
-    /* The main button */
     .dose-btn {
       position: relative;
       width: 100%;
@@ -152,7 +140,7 @@
       font-weight: 500;
       letter-spacing: 0.02em;
       cursor: pointer;
-      transition: transform 0.15s ease, box-shadow 0.25s ease, background 0.4s ease;
+      transition: transform 0.15s ease, box-shadow 0.25s ease;
       overflow: hidden;
       outline: none;
     }
@@ -162,34 +150,22 @@
     .dose-btn.not-taken {
       background: linear-gradient(135deg, #ff4b6e, #c0213f);
       color: #fff;
-      box-shadow: 0 8px 32px rgba(255,75,110,0.45), 0 2px 8px rgba(0,0,0,0.3);
+      animation: btn-pulse 2.5s ease-in-out infinite;
     }
 
-    .dose-btn.not-taken:hover {
-      box-shadow: 0 10px 40px rgba(255,75,110,0.6), 0 2px 8px rgba(0,0,0,0.3);
-      transform: translateY(-1px);
+    @keyframes btn-pulse {
+      0%, 100% { box-shadow: 0 8px 32px rgba(255,75,110,0.45), 0 2px 8px rgba(0,0,0,0.3); }
+      50%       { box-shadow: 0 8px 52px rgba(255,75,110,0.75), 0 2px 8px rgba(0,0,0,0.3); }
     }
+
+    .dose-btn.not-taken:hover { transform: translateY(-1px); }
 
     .dose-btn.taken {
       background: linear-gradient(135deg, #00d68f, #00a86b);
       color: #fff;
       box-shadow: 0 8px 32px rgba(0,214,143,0.4), 0 2px 8px rgba(0,0,0,0.3);
       cursor: default;
-    }
-
-    /* Pulse ring on not-taken */
-    .dose-btn.not-taken::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 18px;
-      box-shadow: inset 0 0 0 2px rgba(255,255,255,0.15);
-      animation: pulse-ring 2.5s ease-in-out infinite;
-    }
-
-    @keyframes pulse-ring {
-      0%, 100% { opacity: 0.4; transform: scale(1); }
-      50% { opacity: 1; transform: scale(1.015); }
+      animation: none;
     }
 
     .btn-inner {
@@ -199,10 +175,7 @@
       gap: 0.6rem;
     }
 
-    .btn-icon {
-      font-size: 1.3rem;
-      line-height: 1;
-    }
+    .btn-icon { font-size: 1.3rem; line-height: 1; }
 
     .status-row {
       margin-top: 1.8rem;
@@ -218,12 +191,18 @@
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background: var(--muted);
-      transition: background 0.4s;
+      transition: background 0.4s, box-shadow 0.4s;
     }
 
-    .status-dot.taken { background: var(--green); box-shadow: 0 0 6px var(--green); }
-    .status-dot.not-taken { background: var(--red); box-shadow: 0 0 6px var(--red); }
+    .status-dot.not-taken { background: var(--red);   box-shadow: 0 0 6px var(--red); }
+    .status-dot.taken     { background: var(--green); box-shadow: 0 0 6px var(--green); }
+
+    .time-taken {
+      margin-top: 0.7rem;
+      font-size: 0.78rem;
+      color: var(--green);
+      min-height: 1.1em;
+    }
 
     .streak {
       margin-top: 2rem;
@@ -252,23 +231,12 @@
       margin-top: 0.2rem;
     }
 
-    /* Confetti canvas */
     #confetti {
       position: fixed;
       inset: 0;
       pointer-events: none;
       z-index: 999;
     }
-
-    /* Time taken badge */
-    .time-taken {
-      display: none;
-      margin-top: 0.8rem;
-      font-size: 0.78rem;
-      color: var(--green);
-      letter-spacing: 0.04em;
-    }
-    .time-taken.visible { display: block; }
   </style>
 </head>
 <body>
@@ -276,11 +244,10 @@
 <canvas id="confetti"></canvas>
 
 <div class="card">
-  <!-- Pill SVG icon -->
   <svg class="pill-icon" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <ellipse cx="36" cy="36" rx="24" ry="14" fill="rgba(78,195,255,0.1)" />
-    <rect x="12" y="29" width="48" height="14" rx="7" fill="#4ec3ff" id="pill-right"/>
-    <rect x="12" y="29" width="24" height="14" rx="7" fill="#1e7ebf" id="pill-left"/>
+    <ellipse cx="36" cy="36" rx="24" ry="14" fill="rgba(78,195,255,0.1)"/>
+    <rect x="12" y="29" width="48" height="14" rx="7" fill="#4ec3ff"/>
+    <rect x="12" y="29" width="24" height="14" rx="7" fill="#1e7ebf"/>
     <circle cx="25" cy="24" r="2.5" fill="#4ec3ff" opacity="0.5"/>
     <circle cx="47" cy="48" r="2.5" fill="#4ec3ff" opacity="0.5"/>
     <circle cx="54" cy="26" r="1.5" fill="#4ec3ff" opacity="0.35"/>
@@ -292,14 +259,14 @@
   <div class="date-display" id="dateDisplay"></div>
   <div class="day-name" id="dayName"></div>
 
-  <button class="dose-btn not-taken" id="doseBtn" onclick="toggleDose()">
+  <button class="dose-btn not-taken" id="doseBtn" onclick="takeDose()">
     <div class="btn-inner">
       <span class="btn-icon" id="btnIcon">💊</span>
       <span id="btnText">Merkitse otetuksi</span>
     </div>
   </button>
 
-  <div class="time-taken" id="timeTaken"></div>
+  <div class="time-taken" id="timeTaken">&nbsp;</div>
 
   <div class="status-row">
     <div class="status-dot not-taken" id="statusDot"></div>
@@ -314,163 +281,242 @@
 </div>
 
 <script>
-  // ── State ────────────────────────────────────────────────
-  const STORAGE_KEY = 'dosetti_v1';
+// ── Storage ───────────────────────────────────────────────────────────────────
+const KEY = 'dosetti_v2';
 
-  function today() {
-    const d = new Date();
-    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+function todayKey() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+function load() {
+  try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch { return {}; }
+}
+
+function save(s) { localStorage.setItem(KEY, JSON.stringify(s)); }
+
+function calcStreak(state) {
+  let streak = 0;
+  const d = new Date();
+  if (!state[todayKey()]) d.setDate(d.getDate() - 1);
+  for (let i = 0; i < 3650; i++) {
+    const k = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    if (state[k]) { streak++; d.setDate(d.getDate() - 1); } else break;
   }
+  return streak;
+}
 
-  function loadState() {
-    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
-    catch { return {}; }
-  }
+// ── UI ────────────────────────────────────────────────────────────────────────
+function updateUI() {
+  const state = load();
+  const t = todayKey();
+  const taken = !!state[t];
 
-  function saveState(s) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
-  }
+  document.getElementById('doseBtn').className      = 'dose-btn ' + (taken ? 'taken' : 'not-taken');
+  document.getElementById('btnIcon').textContent    = taken ? '✓' : '💊';
+  document.getElementById('btnText').textContent    = taken ? 'Otettu tänään' : 'Merkitse otetuksi';
+  document.getElementById('statusDot').className    = 'status-dot ' + (taken ? 'taken' : 'not-taken');
+  document.getElementById('statusText').textContent = taken ? 'Lääke otettu tänään' : 'Lääke ottamatta tänään';
+  document.getElementById('timeTaken').textContent  = (taken && state[t+'_time'])
+    ? `Kuitattu klo ${state[t+'_time']}` : '\u00a0';
+  document.getElementById('streakValue').textContent = calcStreak(state);
+}
 
-  function calcStreak(state) {
-    let streak = 0;
-    const d = new Date();
-    // Start from yesterday if today not taken, from today if taken
-    if (!state[today()]) { d.setDate(d.getDate() - 1); }
-    while (true) {
-      const key = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-      if (state[key]) { streak++; d.setDate(d.getDate()-1); }
-      else break;
-    }
-    return streak;
-  }
+function updateDate() {
+  const now = new Date();
+  const days   = ['Sunnuntai','Maanantai','Tiistai','Keskiviikko','Torstai','Perjantai','Lauantai'];
+  const months = ['tammikuuta','helmikuuta','maaliskuuta','huhtikuuta','toukokuuta','kesäkuuta',
+                  'heinäkuuta','elokuuta','syyskuuta','lokakuuta','marraskuuta','joulukuuta'];
+  document.getElementById('dayName').textContent     = days[now.getDay()];
+  document.getElementById('dateDisplay').textContent = `${now.getDate()}. ${months[now.getMonth()]} ${now.getFullYear()}`;
+}
 
-  // ── UI update ─────────────────────────────────────────────
-  function updateUI() {
-    const state = loadState();
-    const t = today();
-    const taken = !!state[t];
-
-    const btn = document.getElementById('doseBtn');
-    const icon = document.getElementById('btnIcon');
-    const txt  = document.getElementById('btnText');
-    const dot  = document.getElementById('statusDot');
-    const stxt = document.getElementById('statusText');
-    const timeTaken = document.getElementById('timeTaken');
-    const streakEl = document.getElementById('streakValue');
-
-    if (taken) {
-      btn.className = 'dose-btn taken';
-      icon.textContent = '✓';
-      txt.textContent = 'Otettu tänään';
-      dot.className = 'status-dot taken';
-      stxt.textContent = 'Lääke otettu tänään';
-      if (state[t + '_time']) {
-        timeTaken.textContent = `Kuitattu klo ${state[t + '_time']}`;
-        timeTaken.classList.add('visible');
-      }
-    } else {
-      btn.className = 'dose-btn not-taken';
-      icon.textContent = '💊';
-      txt.textContent = 'Merkitse otetuksi';
-      dot.className = 'status-dot not-taken';
-      stxt.textContent = 'Lääke ottamatta tänään';
-      timeTaken.classList.remove('visible');
-    }
-
-    streakEl.textContent = calcStreak(state);
-  }
-
-  function updateDate() {
-    const now = new Date();
-    const days = ['Sunnuntai','Maanantai','Tiistai','Keskiviikko','Torstai','Perjantai','Lauantai'];
-    const months = ['tammikuuta','helmikuuta','maaliskuuta','huhtikuuta','toukokuuta','kesäkuuta',
-                    'heinäkuuta','elokuuta','syyskuuta','lokakuuta','marraskuuta','joulukuuta'];
-    document.getElementById('dayName').textContent = days[now.getDay()];
-    document.getElementById('dateDisplay').textContent =
-      `${now.getDate()}. ${months[now.getMonth()]} ${now.getFullYear()}`;
-  }
-
-  // ── Toggle ────────────────────────────────────────────────
-  function toggleDose() {
-    const state = loadState();
-    const t = today();
-    if (state[t]) return; // already taken, no toggle back
-
-    const now = new Date();
-    state[t] = true;
-    state[t + '_time'] = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
-    saveState(state);
-    updateUI();
-    launchConfetti();
-  }
-
-  // ── Confetti ──────────────────────────────────────────────
-  function launchConfetti() {
-    const canvas = document.getElementById('confetti');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const pieces = Array.from({length: 80}, () => ({
-      x: Math.random() * canvas.width,
-      y: -20,
-      w: Math.random() * 8 + 4,
-      h: Math.random() * 4 + 2,
-      r: Math.random() * Math.PI * 2,
-      dr: (Math.random() - 0.5) * 0.2,
-      vx: (Math.random() - 0.5) * 4,
-      vy: Math.random() * 4 + 2,
-      color: ['#00d68f','#4ec3ff','#ffd700','#ff4b6e','#c3f0ca'][Math.floor(Math.random()*5)],
-      alpha: 1,
-    }));
-
-    let frame;
-    function draw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      let alive = false;
-      for (const p of pieces) {
-        p.x += p.vx; p.y += p.vy; p.r += p.dr;
-        p.vy += 0.1; p.alpha -= 0.012;
-        if (p.alpha > 0) {
-          alive = true;
-          ctx.save();
-          ctx.globalAlpha = Math.max(0, p.alpha);
-          ctx.translate(p.x, p.y);
-          ctx.rotate(p.r);
-          ctx.fillStyle = p.color;
-          ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
-          ctx.restore();
-        }
-      }
-      if (alive) { frame = requestAnimationFrame(draw); }
-      else { ctx.clearRect(0, 0, canvas.width, canvas.height); }
-    }
-    cancelAnimationFrame(frame);
-    draw();
-  }
-
-  // ── Init ──────────────────────────────────────────────────
-  updateDate();
+function takeDose() {
+  const state = load();
+  const t = todayKey();
+  if (state[t]) return;
+  const now = new Date();
+  state[t] = true;
+  state[t+'_time'] = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+  save(state);
   updateUI();
+  launchConfetti();
+}
 
-  // Refresh at midnight
-  function scheduleRefresh() {
-    const now = new Date();
-    const ms = new Date(now.getFullYear(), now.getMonth(), now.getDate()+1) - now;
-    setTimeout(() => { updateDate(); updateUI(); scheduleRefresh(); }, ms);
+// ── Confetti ──────────────────────────────────────────────────────────────────
+function launchConfetti() {
+  const canvas = document.getElementById('confetti');
+  const ctx = canvas.getContext('2d');
+  canvas.width  = window.innerWidth;
+  canvas.height = window.innerHeight;
+  const pieces = Array.from({length: 90}, () => ({
+    x: Math.random() * canvas.width, y: -20,
+    w: Math.random() * 9 + 4, h: Math.random() * 4 + 2,
+    r: Math.random() * Math.PI * 2, dr: (Math.random() - 0.5) * 0.2,
+    vx: (Math.random() - 0.5) * 4, vy: Math.random() * 4 + 2,
+    color: ['#00d68f','#4ec3ff','#ffd700','#ff4b6e','#c3f0ca'][Math.floor(Math.random()*5)],
+    alpha: 1,
+  }));
+  (function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let alive = false;
+    for (const p of pieces) {
+      p.x += p.vx; p.y += p.vy; p.r += p.dr; p.vy += 0.1; p.alpha -= 0.012;
+      if (p.alpha > 0) {
+        alive = true;
+        ctx.save();
+        ctx.globalAlpha = Math.max(0, p.alpha);
+        ctx.translate(p.x, p.y); ctx.rotate(p.r);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+        ctx.restore();
+      }
+    }
+    if (alive) requestAnimationFrame(draw);
+    else ctx.clearRect(0, 0, canvas.width, canvas.height);
+  })();
+}
+
+// ── Midnight refresh ──────────────────────────────────────────────────────────
+function scheduleMidnight() {
+  const now = new Date();
+  const ms = new Date(now.getFullYear(), now.getMonth(), now.getDate()+1) - now;
+  setTimeout(() => { updateDate(); updateUI(); scheduleMidnight(); }, ms);
+}
+
+// ── PWA setup ─────────────────────────────────────────────────────────────────
+// Chrome/Android vaatii oikeat PNG-ikonit manifest.json:issa.
+// Generoidaan ne canvaksella ja injektoidaan Blob URL:nä.
+function buildPWA() {
+  // Piirrä pilleri-ikoni annettuun kokoon
+  function drawIcon(size) {
+    const c = document.createElement('canvas');
+    c.width = c.height = size;
+    const ctx = c.getContext('2d');
+    const s = size;
+
+    // Pyöristetty tausta
+    ctx.fillStyle = '#0f0f1a';
+    if (ctx.roundRect) {
+      ctx.beginPath(); ctx.roundRect(0, 0, s, s, s * 0.22); ctx.fill();
+    } else {
+      const r = s * 0.22;
+      ctx.beginPath();
+      ctx.moveTo(r, 0); ctx.lineTo(s-r, 0);
+      ctx.quadraticCurveTo(s, 0, s, r);
+      ctx.lineTo(s, s-r); ctx.quadraticCurveTo(s, s, s-r, s);
+      ctx.lineTo(r, s);   ctx.quadraticCurveTo(0, s, 0, s-r);
+      ctx.lineTo(0, r);   ctx.quadraticCurveTo(0, 0, r, 0);
+      ctx.closePath(); ctx.fill();
+    }
+
+    // Pillerin taustaellipsi (hehku)
+    ctx.fillStyle = 'rgba(78,195,255,0.10)';
+    ctx.beginPath();
+    ctx.ellipse(s/2, s/2, s*0.37, s*0.22, 0, 0, Math.PI*2);
+    ctx.fill();
+
+    // Pilleri – oikea puoli (vaalea sininen)
+    const px = s * 0.14, py = s * 0.40, pw = s * 0.72, ph = s * 0.20;
+    const pr = ph / 2;
+    ctx.fillStyle = '#4ec3ff';
+    ctx.beginPath();
+    if (ctx.roundRect) {
+      ctx.roundRect(px, py, pw, ph, pr);
+    } else {
+      ctx.moveTo(px + pr, py);
+      ctx.lineTo(px + pw - pr, py);
+      ctx.quadraticCurveTo(px + pw, py, px + pw, py + pr);
+      ctx.lineTo(px + pw, py + ph - pr);
+      ctx.quadraticCurveTo(px + pw, py + ph, px + pw - pr, py + ph);
+      ctx.lineTo(px + pr, py + ph);
+      ctx.quadraticCurveTo(px, py + ph, px, py + ph - pr);
+      ctx.lineTo(px, py + pr);
+      ctx.quadraticCurveTo(px, py, px + pr, py);
+    }
+    ctx.fill();
+
+    // Pilleri – vasen puoli (tumma sininen)
+    ctx.fillStyle = '#1a6aaa';
+    ctx.beginPath();
+    if (ctx.roundRect) {
+      ctx.roundRect(px, py, pw / 2, ph, pr);
+    } else {
+      ctx.moveTo(px + pr, py);
+      ctx.lineTo(px + pw/2, py);
+      ctx.lineTo(px + pw/2, py + ph);
+      ctx.lineTo(px + pr, py + ph);
+      ctx.quadraticCurveTo(px, py + ph, px, py + ph - pr);
+      ctx.lineTo(px, py + pr);
+      ctx.quadraticCurveTo(px, py, px + pr, py);
+    }
+    ctx.fill();
+
+    // Jakoviiva
+    ctx.fillStyle = 'rgba(255,255,255,0.18)';
+    ctx.fillRect(s/2 - 1, py, 2, ph);
+
+    // Koristepisteet
+    [[s*0.32, s*0.29],[s*0.68, s*0.71]].forEach(([cx, cy]) => {
+      ctx.fillStyle = 'rgba(78,195,255,0.6)';
+      ctx.beginPath();
+      ctx.arc(cx, cy, s * 0.038, 0, Math.PI*2);
+      ctx.fill();
+    });
+
+    return c.toDataURL('image/png');
   }
-  scheduleRefresh();
 
-  // Service worker for installability
+  const icon192 = drawIcon(192);
+  const icon512 = drawIcon(512);
+
+  // Apple touch icon (iOS)
+  const appleLink = document.createElement('link');
+  appleLink.rel = 'apple-touch-icon';
+  appleLink.href = icon192;
+  document.head.appendChild(appleLink);
+
+  // Manifest
+  const manifest = {
+    name: 'Dosetti',
+    short_name: 'Dosetti',
+    description: 'Päivittäinen lääkemuistutus',
+    start_url: location.href,
+    display: 'standalone',
+    background_color: '#0f0f1a',
+    theme_color: '#0f0f1a',
+    icons: [
+      { src: icon192, sizes: '192x192', type: 'image/png', purpose: 'any maskable' },
+      { src: icon512, sizes: '512x512', type: 'image/png', purpose: 'any maskable' },
+    ],
+  };
+
+  const mBlob = new Blob([JSON.stringify(manifest)], { type: 'application/manifest+json' });
+  const mURL  = URL.createObjectURL(mBlob);
+  const mLink = document.createElement('link');
+  mLink.rel  = 'manifest';
+  mLink.href = mURL;
+  document.head.appendChild(mLink);
+
+  // Service Worker (tarvitaan PWA-asennusvaatimuksiin)
   if ('serviceWorker' in navigator) {
-    const sw = `
-self.addEventListener('install', e => self.skipWaiting());
-self.addEventListener('activate', e => clients.claim());
-self.addEventListener('fetch', e => e.respondWith(fetch(e.request).catch(() => new Response(''))));
-`;
-    const blob = new Blob([sw], {type: 'application/javascript'});
-    navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(() => {});
+    const swSrc = `
+self.addEventListener('install',  () => self.skipWaiting());
+self.addEventListener('activate', () => clients.claim());
+self.addEventListener('fetch', e => e.respondWith(
+  fetch(e.request).catch(() => new Response('', { status: 200 }))
+));`;
+    const swBlob = new Blob([swSrc], { type: 'application/javascript' });
+    navigator.serviceWorker.register(URL.createObjectURL(swBlob))
+      .catch(e => console.warn('SW:', e));
   }
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+updateDate();
+updateUI();
+scheduleMidnight();
+buildPWA();
 </script>
 </body>
 </html>
