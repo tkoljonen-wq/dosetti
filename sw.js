@@ -1,4 +1,4 @@
-const CACHE = 'dosetti-v1';
+const CACHE = 'dosetti-v2';
 const ASSETS = [
   './index.html',
   './manifest.json',
@@ -25,3 +25,23 @@ self.addEventListener('fetch', e => {
     caches.match(e.request).then(r => r || fetch(e.request))
   );
 });
+
+// Puoliyöllä: aseta badge uudelleen (lääke ottamatta uusi päivä)
+function todayKey() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+function scheduleMidnightBadge() {
+  const now = new Date();
+  const ms = new Date(now.getFullYear(), now.getMonth(), now.getDate()+1) - now;
+  setTimeout(() => {
+    // Uusi päivä alkoi — laita badge päälle
+    if ('setAppBadge' in self) {
+      self.setAppBadge(1).catch(() => {});
+    }
+    scheduleMidnightBadge();
+  }, ms);
+}
+
+scheduleMidnightBadge();
