@@ -403,14 +403,5 @@ updateDate();
 updateUI();
 scheduleMidnight();
 </script>
-  <script>
-  document.body.insertAdjacentHTML('beforeend',
-    `<div style="position:fixed;bottom:20px;left:20px;right:20px;background:#fff;color:#000;padding:16px;border-radius:12px;font-size:14px;z-index:9999">
-      setAppBadge tuettu: ${'setAppBadge' in navigator ? 'KYLLÄ' : 'EI'}<br>
-      serviceWorker tuettu: ${'serviceWorker' in navigator ? 'KYLLÄ' : 'EI'}<br>
-      SW controller: ${navigator.serviceWorker.controller ? 'AKTIIVINEN' : 'EI AKTIIVINEN'}
-    </div>`
-  );
-</script>
 </body>
 </html>
