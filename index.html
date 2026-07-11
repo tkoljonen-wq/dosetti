@@ -394,6 +394,12 @@ function scheduleMidnight() {
   setTimeout(() => { updateDate(); updateUI(); scheduleMidnight(); }, ms);
 }
 
+// Ajastin ei laukea luotettavasti taustalla — päivitä myös kun
+// sovellus palaa esiin. Samalla badge päivittyy uuden päivän alkaessa.
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') { updateDate(); updateUI(); }
+});
+
 // Service Worker
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('./sw.js').catch(() => {});
