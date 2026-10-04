@@ -1,4 +1,7 @@
-const CACHE = 'dosetti-v3';
+// Origin tkoljonen-wq.github.io on jaettu muiden sovellusten kanssa:
+// poistetaan vain tämän sovelluksen omat vanhat välimuistit
+const CACHE_PREFIX = 'dosetti-';
+const CACHE = CACHE_PREFIX + 'v4';
 const ASSETS = [
   './index.html',
   './manifest.json',
@@ -15,7 +18,7 @@ self.addEventListener('install', e => {
 self.addEventListener('activate', e => {
   e.waitUntil(
     caches.keys().then(keys =>
-      Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))
+      Promise.all(keys.filter(k => k.startsWith(CACHE_PREFIX) && k !== CACHE).map(k => caches.delete(k)))
     ).then(() => clients.claim())
   );
 });
